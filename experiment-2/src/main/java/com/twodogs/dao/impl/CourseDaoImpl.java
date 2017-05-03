@@ -2,6 +2,7 @@ package com.twodogs.dao.impl;
 
 import com.twodogs.dao.CourseDao;
 import com.twodogs.model.CoursesEntity;
+import com.twodogs.model.Model;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -17,7 +18,6 @@ import java.util.UUID;
 public class CourseDaoImpl implements CourseDao {
     private SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 
-    @Override
     public List findAll() {
         Session     session     = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
@@ -27,8 +27,7 @@ public class CourseDaoImpl implements CourseDao {
         return list;
     }
 
-    @Override
-    public String addCourse(CoursesEntity course) {
+    public String add(Model course) {
         Session     session     = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         String      uuid        = (String) session.save(course);
