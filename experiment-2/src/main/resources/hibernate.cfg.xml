@@ -5,7 +5,7 @@
 <hibernate-configuration>
     <session-factory>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-        <property name="connection.url">jdbc:mysql://localhost:3306/message</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/message?useSSL=false</property>
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="connection.username">root</property>
         <property name="connection.password">123456</property>
@@ -14,6 +14,7 @@
         <mapping class="com.twodogs.model.CoursesEntity"/>
         <mapping class="com.twodogs.model.StudentCoursePivotEntity"/>
         <mapping class="com.twodogs.model.StudentsEntity"/>
+        <mapping class="com.twodogs.model.TeachersEntity"/>
 
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hbm2ddl.auto">update</property> -->

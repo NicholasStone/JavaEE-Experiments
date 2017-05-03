@@ -2,6 +2,7 @@ package com.twodogs.dao.impl;
 
 import com.twodogs.dao.CourseDao;
 import com.twodogs.model.CoursesEntity;
+import com.twodogs.model.TeachersEntity;
 
 import java.util.List;
 
@@ -12,12 +13,14 @@ import java.util.List;
 class CourseDaoImplTest {
     private CourseDao courseDao = new CourseDaoImpl();
 
-    public void addCourse(){
-        CoursesEntity course = new CoursesEntity("编译原理");
+    public void addCourse() {
+        TeachersEntity teacher = new TeachersEntity("李");
+        System.out.println(new TeacherDaoImpl().addTeacher(teacher));
+        CoursesEntity  course  = new CoursesEntity("编译原理", teacher);
         System.out.println(this.courseDao.addCourse(course));
     }
 
-    public void findAll(){
+    public void findAll() {
         List courses = courseDao.findAll();
         for (Object course1 : courses) {
             CoursesEntity course = (CoursesEntity) course1;

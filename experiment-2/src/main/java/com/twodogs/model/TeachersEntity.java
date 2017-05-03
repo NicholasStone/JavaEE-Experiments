@@ -1,5 +1,6 @@
 package com.twodogs.model;
 
+import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -10,12 +11,19 @@ import java.util.Set;
  * Created by nicholas on 17-5-3.
  */
 @Entity
-@Table(name = "students", schema = "message")
-public class StudentsEntity {
+@Table(name = "teachers", schema = "message")
+public class TeachersEntity {
     private String uuid;
     private String name;
+    private Set<CoursesEntity> coursesEntities = new HashSet<>(0);
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    public TeachersEntity(String name) {
+        this.name = name;
+    }
+
+    public TeachersEntity() {}
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "teacher")
     public Set<CoursesEntity> getCoursesEntities() {
         return coursesEntities;
     }
@@ -23,8 +31,6 @@ public class StudentsEntity {
     public void setCoursesEntities(Set<CoursesEntity> coursesEntities) {
         this.coursesEntities = coursesEntities;
     }
-
-    private Set<CoursesEntity> coursesEntities = new HashSet<>(0);
 
     @Id
     @Column(name = "uuid")
@@ -53,7 +59,7 @@ public class StudentsEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        StudentsEntity that = (StudentsEntity) o;
+        TeachersEntity that = (TeachersEntity) o;
 
         if (uuid != null ? !uuid.equals(that.uuid) : that.uuid != null) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;

@@ -3,33 +3,39 @@ package com.twodogs.model;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.UUID;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
- * Created by nicholas on 17-4-26.
+ * Created by nicholas on 17-5-3.
  */
 @Entity
 @Table(name = "courses", schema = "message")
 public class CoursesEntity {
-    private String uuid;
-    private String name;
+    private String         uuid;
+    private String         name;
+    private TeachersEntity teacher;
+
+
+    private Set<StudentsEntity> studentsEntities = new HashSet<>(0);
 
     public CoursesEntity() {
     }
 
-    public CoursesEntity(String name) {
+    public CoursesEntity(String name, TeachersEntity teacher) {
         this.name = name;
+        this.teacher = teacher;
     }
 
     @Id
-    @Column(name = "uuid", columnDefinition = "uuid", updatable = false)
+    @Column(name = "uuid")
     @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name="uuid", strategy = "uuid2")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
     public String getUuid() {
         return uuid;
     }
 
-    public void setUuid(String  uuid) {
+    public void setUuid(String uuid) {
         this.uuid = uuid;
     }
 
@@ -43,6 +49,33 @@ public class CoursesEntity {
         this.name = name;
     }
 
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "student_course_pivot", joinColumns = {
+            @JoinColumn(name = "course_id", nullable = false, updatable = false)
+    }, inverseJoinColumns = {
+            @JoinColumn(name = "student_id", nullable = false, updatable = false)
+    })
+    //https://www.mkyong.com/hibernate/hibernate-many-to-many-relationship-example-annotation/
+    public Set<StudentsEntity> getStudentsEntities() {
+        return studentsEntities;
+    }
+
+    public void setStudentsEntities(Set<StudentsEntity> studentsEntities) {
+        this.studentsEntities = studentsEntities;
+    }
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "teacher_id", nullable = false)
+    //https://www.mkyong.com/hibernate/hibernate-one-to-many-relationship-example-annotation/
+    public TeachersEntity getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(TeachersEntity teacher) {
+        this.teacher = teacher;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -52,6 +85,7 @@ public class CoursesEntity {
 
         if (uuid != null ? !uuid.equals(that.uuid) : that.uuid != null) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        if (teacher != null ? !teacher.equals(that.teacher) : that.teacher != null) return false;
 
         return true;
     }
@@ -60,6 +94,7 @@ public class CoursesEntity {
     public int hashCode() {
         int result = uuid != null ? uuid.hashCode() : 0;
         result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (teacher != null ? teacher.hashCode() : 0);
         return result;
     }
 }
