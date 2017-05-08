@@ -1,6 +1,7 @@
-package com.twodogs.dao.impl;
+package com.twodogs.dao;
 
-import com.twodogs.dao.CourseDao;
+import com.twodogs.dao.ext.CourseDao;
+import com.twodogs.dao.ext.TeacherDao;
 import com.twodogs.model.CoursesEntity;
 import com.twodogs.model.TeachersEntity;
 
@@ -11,11 +12,11 @@ import java.util.List;
  * Created by nicholas on 17-5-2.
  */
 class CourseDaoImplTest {
-    private CourseDao courseDao = new CourseDaoImpl();
+    private CourseDao courseDao = new CourseDao();
 
     public void addCourse() {
         TeachersEntity teacher = new TeachersEntity("李");
-        System.out.println(new TeacherDaoImpl().addTeacher(teacher));
+        System.out.println(new TeacherDao().addTeacher(teacher));
         CoursesEntity  course  = new CoursesEntity("编译原理", teacher);
         System.out.println(this.courseDao.addCourse(course));
     }

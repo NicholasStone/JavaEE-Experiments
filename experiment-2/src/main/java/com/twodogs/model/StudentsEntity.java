@@ -11,7 +11,7 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "students", schema = "message")
-public class StudentsEntity {
+public class StudentsEntity implements Model{
     private String uuid;
     private String name;
 

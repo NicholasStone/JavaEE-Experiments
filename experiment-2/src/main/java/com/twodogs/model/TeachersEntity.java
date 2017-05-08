@@ -12,7 +12,7 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "teachers", schema = "message")
-public class TeachersEntity {
+public class TeachersEntity implements Model{
     private String uuid;
     private String name;
     private Set<CoursesEntity> coursesEntities = new HashSet<>(0);

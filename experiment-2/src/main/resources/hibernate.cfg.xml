@@ -12,7 +12,6 @@
         <property name="hibernate.connection.characterEncoding">utf8</property>
         <property name="hibernate.connection.useUnicode">true</property>
         <mapping class="com.twodogs.model.CoursesEntity"/>
-        <mapping class="com.twodogs.model.StudentCoursePivotEntity"/>
         <mapping class="com.twodogs.model.StudentsEntity"/>
         <mapping class="com.twodogs.model.TeachersEntity"/>
 
