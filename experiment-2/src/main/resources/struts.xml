@@ -8,8 +8,10 @@
     <constant name="struts.enable.DynamicMethodInvocation" value="true"/>
     <constant name="struts.devMode" value="true"/>
     <constant name="struts.action.extension" value=""/>
-    <package name="select" extends="struts-default" namespace="/">
-
+    <package name="Auth" extends="struts-default" namespace="/auth">
+        <action name="auth" class="com.twodogs.action.AuthAction" method="auth">
+            <result name="success">/index.jsp</result>
+        </action>
     </package>
 
 </struts>
