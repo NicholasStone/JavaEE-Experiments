@@ -7,11 +7,29 @@
 <struts>
     <constant name="struts.enable.DynamicMethodInvocation" value="true"/>
     <constant name="struts.devMode" value="true"/>
-    <constant name="struts.action.extension" value=""/>
-    <package name="Auth" extends="struts-default" namespace="/auth">
-        <action name="auth" class="com.twodogs.action.AuthAction" method="auth">
-            <result name="success">/index.jsp</result>
+    <constant name="struts.action.extension" value="html"/>
+    <constant name="struts.i18n.encoding" value="UTF-8"/>
+    <constant name="struts.serve.static" value="true"/>
+    <package name="index" extends="struts-default" namespace="/">
+        <action name="index" class="com.twodogs.action.IndexAction" method="index">
+            <result>index.jsp</result>
         </action>
     </package>
-
+    <package name="default" extends="struts-default" namespace="/auth">
+        <interceptors>
+            <interceptor name="auth-check" class="com.twodogs.interceptor.AuthInterceptor"/>
+            <interceptor-stack name="auth">
+                <interceptor-ref name="auth-check"/>
+                <interceptor-ref name="defaultStack"/>
+            </interceptor-stack>
+        </interceptors>
+        <default-interceptor-ref name="auth"/>
+        <global-results>
+            <result name="login">login.jsp</result>
+        </global-results>
+        <action name="auth" class="com.twodogs.action.AuthAction" method="execute">
+            <result name="success">index.jsp</result>
+            <result name="input">login.jsp</result>
+        </action>
+    </package>
 </struts>

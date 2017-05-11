@@ -14,6 +14,8 @@ import java.util.Set;
 public class StudentsEntity implements Model{
     private String uuid;
     private String name;
+    private String password;
+    private Set<CoursesEntity> coursesEntities = new HashSet<>(0);
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     public Set<CoursesEntity> getCoursesEntities() {
@@ -23,8 +25,6 @@ public class StudentsEntity implements Model{
     public void setCoursesEntities(Set<CoursesEntity> coursesEntities) {
         this.coursesEntities = coursesEntities;
     }
-
-    private Set<CoursesEntity> coursesEntities = new HashSet<>(0);
 
     @Id
     @Column(name = "uuid")
@@ -46,6 +46,16 @@ public class StudentsEntity implements Model{
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Basic
+    @Column(name = "password")
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override

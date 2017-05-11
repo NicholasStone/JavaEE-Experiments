@@ -50,10 +50,10 @@ public class CoursesEntity implements Model{
     }
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "student_course_pivot", joinColumns = {
-            @JoinColumn(name = "course_id", nullable = false, updatable = false)
+    @JoinTable(name = "students_courses", joinColumns = {
+            @JoinColumn(name = "StudentsEntity_uuid", nullable = false, updatable = false)
     }, inverseJoinColumns = {
-            @JoinColumn(name = "student_id", nullable = false, updatable = false)
+            @JoinColumn(name = "coursesEntities_uuid", nullable = false, updatable = false)
     })
     //https://www.mkyong.com/hibernate/hibernate-many-to-many-relationship-example-annotation/
     public Set<StudentsEntity> getStudentsEntities() {
@@ -90,11 +90,11 @@ public class CoursesEntity implements Model{
         return true;
     }
 
-    @Override
-    public int hashCode() {
-        int result = uuid != null ? uuid.hashCode() : 0;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (teacher != null ? teacher.hashCode() : 0);
-        return result;
-    }
+//    @Override
+//    public int hashCode() {
+//        int result = uuid != null ? uuid.hashCode() : 0;
+//        result = 31 * result + (name != null ? name.hashCode() : 0);
+//        result = 31 * result + (teacher != null ? teacher.hashCode() : 0);
+//        return result;
+//    }
 }

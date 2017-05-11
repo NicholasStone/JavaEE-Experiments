@@ -15,6 +15,7 @@ import java.util.Set;
 public class TeachersEntity implements Model{
     private String uuid;
     private String name;
+    private String password;
     private Set<CoursesEntity> coursesEntities = new HashSet<>(0);
 
     public TeachersEntity(String name) {
@@ -52,6 +53,16 @@ public class TeachersEntity implements Model{
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Basic
+    @Column(name = "password")
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override

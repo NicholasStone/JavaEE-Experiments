@@ -1,6 +1,8 @@
 package com.twodogs.dao.ext;
 
 import com.twodogs.dao.Dao;
+import com.twodogs.util.Parse;
+import com.twodogs.model.StudentsEntity;
 
 import java.util.List;
 
@@ -10,5 +12,13 @@ import java.util.List;
 public class StudentDao extends Dao {
     public List findAll() {
         return super.findAll("FROM StudentEntity");
+    }
+
+    public StudentsEntity findByName(String name) {
+        return (StudentsEntity) super.findByKey("from StudentsEntity where name=?", Parse.str2list(name));
+    }
+
+    public StudentsEntity findById(String uuid) {
+        return (StudentsEntity)super.findByKey("from StudentEntity where id=?", Parse.str2list(uuid));
     }
 }
