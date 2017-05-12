@@ -10,9 +10,9 @@ import java.util.Set;
 /**
  * Created by nicholas on 17-5-3.
  */
-@Entity
+@javax.persistence.Entity
 @Table(name = "students", schema = "message")
-public class StudentsEntity implements Model{
+public class StudentsEntity implements Entity {
     private String uuid;
     private String name;
     private String password;

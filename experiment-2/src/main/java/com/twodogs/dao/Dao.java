@@ -1,6 +1,6 @@
 package com.twodogs.dao;
 
-import com.twodogs.model.Model;
+import com.twodogs.model.Entity;
 import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
@@ -22,7 +22,7 @@ public abstract class Dao {
         return list;
     }
 
-    protected Model findByKey(String queryString, List<String> params) {
+    protected Entity findByKey(String queryString, List<String> params) {
         Session     session     = this.getSession();
         Transaction transaction = session.beginTransaction();
         Query       query       = session.createQuery(queryString);
@@ -31,13 +31,13 @@ public abstract class Dao {
         for (String param : params) {
             query.setParameter(index++, param);
         }
-        Model model = (Model) query.uniqueResult();
+        Entity model = (Entity) query.uniqueResult();
         transaction.commit();
 //        session.close();
         return model;
     }
 
-    public String save(Model model) {
+    public String save(Entity model) {
         Session     session     = this.getSession();
         Transaction transaction = session.beginTransaction();
         String      uuid        = (String) session.save(model);
@@ -46,7 +46,7 @@ public abstract class Dao {
         return uuid;
     }
 
-    public void update(Model model) {
+    public void update(Entity model) {
         Session     session     = this.getSession();
         Transaction transaction = session.beginTransaction();
         session.update(model);
