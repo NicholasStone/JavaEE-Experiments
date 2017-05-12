@@ -77,19 +77,27 @@ public class AuthAction extends ActionSupport implements ServletRequestAware, Se
             addActionError("密码不能为空");
             return;
         }
-        if (identity.equals(STUDENT) || identity.equals(INSTRUCTOR)) {
+        if (!(identity.equals(STUDENT) || identity.equals(INSTRUCTOR))) {
             addActionError("输入不合法");
             return;
         }
         auth = new Auth(username, password, identity);
-        if (!new AuthDao(auth).authorize()) {
-            addActionError("用户名不存在或密码错误");
+        if (new AuthDao(auth).authorize()) {
+            addActionError("用户不存在或密码错误");
         }
+    }
+
+    public HttpServletRequest getRequest() {
+        return request;
     }
 
     @Override
     public void setServletRequest(HttpServletRequest httpServletRequest) {
         this.request = httpServletRequest;
+    }
+
+    public Map<String, Object> getSession() {
+        return session;
     }
 
     @Override

@@ -22,7 +22,7 @@
     </style>
 </head>
 <body>
-<div class="container-fluid">
+<div class="container">
     <h1>登录</h1>
     <form action="<s:url namespace="/auth" action="auth"/>" method="post"
           class="col-md-4 col-md-offset-4 form-group form-horizontal">
@@ -43,7 +43,7 @@
             <label class="col-sm-3">身份:</label>
             <div class="col-sm-9">
                 <label>
-                    <s:textfield name="identity" class="radio" type="radio" value="teacher"/> 教师
+                    <s:textfield name="identity" class="radio" type="radio" value="instructor"/> 教师
                 </label>
                 <label>
                     <s:textfield name="identity" class="radio" type="radio" value="student"/> 学生

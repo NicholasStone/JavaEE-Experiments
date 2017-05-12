@@ -31,15 +31,18 @@ public class AuthDao implements UserIdentity {
         boolean flag = false;
         if (INSTRUCTOR.equals(auth.getIdentity())) {
             TeachersEntity entity = new TeacherDao().findByName(auth.getUsername());
-            if (entity.getPassword() == null || entity.getPassword().equals("")){
+            if (entity == null) {
                 return false;
             }
-            if (Encrypt.md5(auth.getPassword()).equals(entity.getPassword())) {
+            if (Encrypt.md5sum(auth.getPassword()).equals(entity.getPassword())) {
                 flag = true;
             }
         } else {
             StudentsEntity entity = new StudentDao().findByName(auth.getUsername());
-            if (Encrypt.md5(auth.getPassword()).equals(entity.getPassword())) {
+            if (entity == null) {
+                return false;
+            }
+            if (Encrypt.md5sum(auth.getPassword()).equals(entity.getPassword())) {
                 flag = true;
             }
         }

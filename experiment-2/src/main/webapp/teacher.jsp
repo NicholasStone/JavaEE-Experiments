@@ -7,7 +7,7 @@
 </head>
 <body>
 <div class="container-fluid">
-    <h2>欢迎 <s:property value="#session.user.username"/> </h2>
+    <h2>欢迎 <s:property value="#session.Auth.username"/> </h2>
 </div>
 </body>
 </html>

@@ -1,5 +1,6 @@
 package com.twodogs.model;
 
+import com.twodogs.util.Encrypt;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -16,6 +17,12 @@ public class StudentsEntity implements Model{
     private String name;
     private String password;
     private Set<CoursesEntity> coursesEntities = new HashSet<>(0);
+
+    public StudentsEntity(){}
+
+    public StudentsEntity(String name) {
+        this.name = name;
+    }
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     public Set<CoursesEntity> getCoursesEntities() {
@@ -55,7 +62,7 @@ public class StudentsEntity implements Model{
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = Encrypt.md5sum(password);
     }
 
     @Override

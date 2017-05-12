@@ -37,7 +37,7 @@ public abstract class Dao {
         return model;
     }
 
-    public String add(Model model) {
+    public String save(Model model) {
         Session     session     = this.getSession();
         Transaction transaction = session.beginTransaction();
         String      uuid        = (String) session.save(model);
