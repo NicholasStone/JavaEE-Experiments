@@ -1,5 +1,6 @@
 package com.twodogs.dao.ext;
 
+import com.twodogs.constant.UserIdentity;
 import com.twodogs.model.Auth;
 import com.twodogs.model.StudentsEntity;
 import com.twodogs.model.TeachersEntity;
@@ -8,7 +9,7 @@ import com.twodogs.util.Encrypt;
 /**
  * Created by nicholas on 5/11/17.
  */
-public class AuthDao {
+public class AuthDao implements UserIdentity {
     private Auth auth;
 
     public AuthDao() {
@@ -28,8 +29,11 @@ public class AuthDao {
 
     public boolean authorize() {
         boolean flag = false;
-        if ("teacher".equals(auth.getIdentity())) {
+        if (INSTRUCTOR.equals(auth.getIdentity())) {
             TeachersEntity entity = new TeacherDao().findByName(auth.getUsername());
+            if (entity.getPassword() == null || entity.getPassword().equals("")){
+                return false;
+            }
             if (Encrypt.md5(auth.getPassword()).equals(entity.getPassword())) {
                 flag = true;
             }

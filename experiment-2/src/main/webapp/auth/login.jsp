@@ -11,26 +11,36 @@
 <head>
     <title>Auth</title>
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
+    <style>
+        .errorMessage{
+            height: 34px;
+            display: inline-block;
+            color: #a94442;
+            vertical-align: middle;
+            padding-left: 1em;
+        }
+    </style>
 </head>
 <body>
 <div class="container-fluid">
     <h1>登录</h1>
     <form action="<s:url namespace="/auth" action="auth"/>" method="post"
           class="col-md-4 col-md-offset-4 form-group form-horizontal">
+        <s:actionerror/>
         <div class="form-group form-inline">
             <div class="col-sm-3">
-                <label for="username">用户名</label>
+                <label for="username">用户名:</label>
             </div>
             <s:textfield name="username" class="form-control col-sm-9" id="username" type="text"/>
         </div>
         <div class="form-group form-inline">
             <div class="col-sm-3">
-                <label for="password">密码</label>
+                <label for="password">密码:</label>
             </div>
             <s:textfield name="password" class="form-control col-sm-9" id="password" type="password"/>
         </div>
         <div class="form-group form-inline">
-            <div class="col-sm-3">身份:</div>
+            <label class="col-sm-3">身份:</label>
             <div class="col-sm-9">
                 <label>
                     <s:textfield name="identity" class="radio" type="radio" value="teacher"/> 教师
