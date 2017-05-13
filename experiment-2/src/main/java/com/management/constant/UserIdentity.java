@@ -1,4 +1,4 @@
-package com.twodogs.constant;
+package com.management.constant;
 
 /**
  * Created by nicholas on 5/12/17.

@@ -10,14 +10,9 @@
     <constant name="struts.action.extension" value="html"/>
     <constant name="struts.i18n.encoding" value="UTF-8"/>
     <constant name="struts.serve.static" value="true"/>
-    <package name="index" extends="struts-default" namespace="/">
-        <action name="index" class="com.twodogs.action.IndexAction" method="index">
-            <result>index.jsp</result>
-        </action>
-    </package>
-    <package name="default" extends="struts-default" namespace="/auth">
+    <package name="interceptor-default" extends="struts-default">
         <interceptors>
-            <interceptor name="auth-check" class="com.twodogs.interceptor.AuthInterceptor"/>
+            <interceptor name="auth-check" class="com.management.interceptor.AuthInterceptor"/>
             <interceptor-stack name="auth">
                 <interceptor-ref name="auth-check"/>
                 <interceptor-ref name="defaultStack"/>
@@ -25,12 +20,29 @@
         </interceptors>
         <default-interceptor-ref name="auth"/>
         <global-results>
-            <result name="login">login.jsp</result>
+            <result name="login">/auth/login.jsp</result>
         </global-results>
-        <action name="auth" class="com.twodogs.action.AuthAction" method="execute">
-            <result name="student">/student.jsp</result>
-            <result name="instructor">/teacher.jsp</result>
+    </package>
+    <package name="index" extends="struts-default" namespace="/">
+        <action name="index" class="com.management.action.IndexAction" method="index">
+            <result>/index.jsp</result>
+        </action>
+    </package>
+    <package name="default" extends="interceptor-default" namespace="/auth">
+        <action name="auth" class="com.management.action.AuthAction" method="execute">
+            <result name="student" type="redirect">/student/index.html</result>
+            <result name="instructor" type="redirect">/instructor/index.html</result>
             <result name="input">login.jsp</result>
+        </action>
+    </package>
+    <package name="instructor" extends="interceptor-default" namespace="/instructor">
+        <action name="index" class="com.management.action.InstructorAction" method="index">
+            <result name="success">/instructor/index.jsp</result>
+        </action>
+    </package>
+    <package name="student" extends="interceptor-default" namespace="/student">
+        <action name="index" class="com.management.action.StudentAction" method="index">
+            <result name="success">/student/index.jsp</result>
         </action>
     </package>
 </struts>

@@ -1,4 +1,4 @@
-package com.twodogs.model;
+package com.management.model;
 
 import org.hibernate.annotations.GenericGenerator;
 

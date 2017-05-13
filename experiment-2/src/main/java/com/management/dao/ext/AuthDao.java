@@ -1,11 +1,11 @@
-package com.twodogs.dao.ext;
+package com.management.dao.ext;
 
-import com.twodogs.constant.UserIdentity;
-import com.twodogs.model.Auth;
-import com.twodogs.model.Entity;
-import com.twodogs.model.StudentsEntity;
-import com.twodogs.model.TeachersEntity;
-import com.twodogs.util.Encrypt;
+import com.management.constant.UserIdentity;
+import com.management.model.Auth;
+import com.management.model.Entity;
+import com.management.model.StudentsEntity;
+import com.management.model.TeachersEntity;
+import com.management.util.Encrypt;
 
 /**
  * Created by nicholas on 5/11/17.

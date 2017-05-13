@@ -1,8 +1,8 @@
-package com.twodogs.dao.ext;
+package com.management.dao.ext;
 
-import com.twodogs.dao.Dao;
-import com.twodogs.model.TeachersEntity;
-import com.twodogs.util.Parse;
+import com.management.dao.Dao;
+import com.management.model.TeachersEntity;
+import com.management.util.Parse;
 
 import java.util.List;
 
@@ -15,7 +15,12 @@ public class TeacherDao extends Dao {
         return super.findAll("FROM TeachersEntity ");
     }
 
+    public TeachersEntity findById(String id) {
+        return (TeachersEntity) super.findByKey("FROM TeacherEntity where id=?", Parse.str2list(id));
+    }
+
     public TeachersEntity findByName(String name) {
         return (TeachersEntity) super.findByKey("FROM TeachersEntity where name=?", Parse.str2list(name));
     }
+
 }

@@ -1,11 +1,11 @@
-package com.twodogs.dao;
+package com.management.dao;
 
-import com.twodogs.dao.ext.CourseDao;
-import com.twodogs.dao.ext.StudentDao;
-import com.twodogs.dao.ext.TeacherDao;
-import com.twodogs.model.CoursesEntity;
-import com.twodogs.model.StudentsEntity;
-import com.twodogs.model.TeachersEntity;
+import com.management.dao.ext.CourseDao;
+import com.management.dao.ext.StudentDao;
+import com.management.dao.ext.TeacherDao;
+import com.management.model.CoursesEntity;
+import com.management.model.StudentsEntity;
+import com.management.model.TeachersEntity;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -16,7 +16,8 @@ import java.util.Set;
 public class DaoTest {
     public static void main(String[] args) {
 //        save();
-        TeachersEntity teachersEntity = new TeachersEntity();
+        TeacherDao teacherDao = new TeacherDao();
+        TeachersEntity teachersEntity = teacherDao.findByName("teacher1");
         Set<CoursesEntity> coursesEntitySet = teachersEntity.getCoursesEntities();
         for(CoursesEntity entity:coursesEntitySet){
             System.out.println(entity.getUuid());

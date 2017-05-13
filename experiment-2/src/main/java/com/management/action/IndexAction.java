@@ -1,4 +1,4 @@
-package com.twodogs.action;
+package com.management.action;
 
 import com.opensymphony.xwork2.ActionSupport;
 

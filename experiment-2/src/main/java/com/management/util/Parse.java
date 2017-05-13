@@ -1,4 +1,4 @@
-package com.twodogs.util;
+package com.management.util;
 
 
 import java.util.ArrayList;

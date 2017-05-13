@@ -11,6 +11,7 @@
 <head>
     <title>Auth</title>
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
+    <s:head/>
     <style>
         .errorMessage{
             height: 34px;

@@ -1,4 +1,4 @@
-package com.twodogs.model;
+package com.management.model;
 
 /**
  * Created by nicholas on 5/4/17.

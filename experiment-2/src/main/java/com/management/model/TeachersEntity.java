@@ -1,6 +1,6 @@
-package com.twodogs.model;
+package com.management.model;
 
-import com.twodogs.util.Encrypt;
+import com.management.util.Encrypt;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;

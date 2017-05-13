@@ -1,6 +1,6 @@
-package com.twodogs.dao;
+package com.management.dao;
 
-import com.twodogs.model.Entity;
+import com.management.model.Entity;
 import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;

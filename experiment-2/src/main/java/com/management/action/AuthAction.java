@@ -1,14 +1,13 @@
-package com.twodogs.action;
+package com.management.action;
 
 import com.opensymphony.xwork2.ActionSupport;
-import com.twodogs.constant.UserIdentity;
-import com.twodogs.dao.ext.AuthDao;
-import com.twodogs.model.Auth;
+import com.management.constant.UserIdentity;
+import com.management.dao.ext.AuthDao;
+import com.management.model.Auth;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -54,6 +53,7 @@ public class AuthAction extends ActionSupport implements ServletRequestAware, Se
     @Override
     public String execute() throws Exception {
         if (!request.getMethod().toUpperCase().equals("POST")) {
+            System.out.println("login");
             return LOGIN;
         }
         session.put("Auth", auth);

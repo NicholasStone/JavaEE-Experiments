@@ -1,7 +1,8 @@
-package com.twodogs.interceptor;
+package com.management.interceptor;
 
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
+import com.management.model.Auth;
 
 /**
  * Created by nicholas on 5/10/17.
@@ -14,9 +15,9 @@ public class AuthInterceptor extends AbstractInterceptor {
             return actionInvocation.invoke();
         }
 
-        String user = (String) actionInvocation.getInvocationContext().getSession().get("username");
-        if (user == null) {
-            return "auth";
+        Auth auth = (Auth) actionInvocation.getInvocationContext().getSession().get("Auth");
+        if (auth == null) {
+            return "login";
         }
         return actionInvocation.invoke();
     }

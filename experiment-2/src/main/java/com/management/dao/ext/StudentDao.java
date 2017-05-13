@@ -1,8 +1,8 @@
-package com.twodogs.dao.ext;
+package com.management.dao.ext;
 
-import com.twodogs.dao.Dao;
-import com.twodogs.util.Parse;
-import com.twodogs.model.StudentsEntity;
+import com.management.dao.Dao;
+import com.management.util.Parse;
+import com.management.model.StudentsEntity;
 
 import java.util.List;
 
