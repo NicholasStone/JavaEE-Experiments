@@ -13,7 +13,7 @@
 </head>
 <body>
 <div class="container">
-
+    <h2>欢迎 <s:property value="#session.Auth.name"/></h2>
 </div>
 </body>
 </html>

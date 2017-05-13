@@ -1,8 +1,10 @@
 package com.management.action;
 
+import com.management.dao.ext.StudentDao;
+import com.management.dao.ext.InstructorDao;
+import com.management.util.Encrypt;
 import com.opensymphony.xwork2.ActionSupport;
 import com.management.constant.UserIdentity;
-import com.management.dao.ext.AuthDao;
 import com.management.model.Auth;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.SessionAware;
@@ -11,7 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 /**
- * Created by nicholas on 17-5-2.
+ * @author: nicholas
+ * @date: 17-5-2
  */
 public class AuthAction extends ActionSupport implements ServletRequestAware, SessionAware, UserIdentity {
     private String              password;
@@ -19,12 +22,7 @@ public class AuthAction extends ActionSupport implements ServletRequestAware, Se
     private String              identity;
     private Auth                auth;
     private Map<String, Object> session;
-
-    HttpServletRequest request;
-
-    public String getDefaultIdentityValue() {
-        return STUDENT;
-    }
+    private HttpServletRequest  request;
 
     public String getPassword() {
         return password;
@@ -71,7 +69,6 @@ public class AuthAction extends ActionSupport implements ServletRequestAware, Se
         }
         if (username == null || username.trim().equals("")) {
             addActionError("用户名不能为空");
-//            return;
         }
         if (password == null || password.trim().equals("")) {
             addActionError("密码不能为空");
@@ -81,8 +78,7 @@ public class AuthAction extends ActionSupport implements ServletRequestAware, Se
             addActionError("输入不合法");
             return;
         }
-        auth = new Auth(username, password, identity);
-        if (new AuthDao(auth).authorize()) {
+        if (!authCheck()) {
             addActionError("用户不存在或密码错误");
         }
     }
@@ -103,5 +99,14 @@ public class AuthAction extends ActionSupport implements ServletRequestAware, Se
     @Override
     public void setSession(Map<String, Object> session) {
         this.session = session;
+    }
+
+    private boolean authCheck() {
+        if (INSTRUCTOR.equals(identity)) {
+            auth = new InstructorDao().findByName(username);
+        } else {
+            auth = new StudentDao().findByName(username);
+        }
+        return auth != null && Encrypt.md5sum(password).equals(auth.getPassword());
     }
 }

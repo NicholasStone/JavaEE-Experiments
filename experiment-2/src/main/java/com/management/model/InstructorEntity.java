@@ -8,21 +8,24 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Created by nicholas on 17-5-3.
+ * @author: nicholas
+ * @date: 17-5-3
  */
 @javax.persistence.Entity
-@Table(name = "teachers", schema = "message")
-public class TeachersEntity implements Entity {
+@Table(name = "instructor", schema = "message")
+public class InstructorEntity extends Auth implements Entity {
     private String uuid;
-    private String name;
-    private String password;
     private Set<CoursesEntity> coursesEntities = new HashSet<>(0);
 
-    public TeachersEntity(String name) {
+    public InstructorEntity(String name) {
         this.name = name;
     }
 
-    public TeachersEntity() {
+    public InstructorEntity() {
+    }
+
+    public InstructorEntity(String name, String password, String identity) {
+        super(name, password, identity);
     }
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "teacher")
@@ -63,7 +66,7 @@ public class TeachersEntity implements Entity {
     }
 
     public void setPassword(String password) {
-        this.password = Encrypt.md5sum(password);
+        this.password = password;
     }
 
     @Override
@@ -71,12 +74,9 @@ public class TeachersEntity implements Entity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        TeachersEntity that = (TeachersEntity) o;
+        InstructorEntity that = (InstructorEntity) o;
 
-        if (uuid != null ? !uuid.equals(that.uuid) : that.uuid != null) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
-
-        return true;
+        return (uuid != null ? uuid.equals(that.uuid) : that.uuid == null) && (name != null ? name.equals(that.name) : that.name == null);
     }
 
     @Override

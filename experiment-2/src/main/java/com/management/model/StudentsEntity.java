@@ -8,20 +8,24 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Created by nicholas on 17-5-3.
+ * @author: nicholas
+ * @date: 17-5-3
  */
 @javax.persistence.Entity
 @Table(name = "students", schema = "message")
-public class StudentsEntity implements Entity {
+public class StudentsEntity extends Auth implements Entity {
     private String uuid;
-    private String name;
-    private String password;
     private Set<CoursesEntity> coursesEntities = new HashSet<>(0);
 
-    public StudentsEntity(){}
+    public StudentsEntity() {
+    }
 
     public StudentsEntity(String name) {
         this.name = name;
+    }
+
+    public StudentsEntity(String name, String password, String identity) {
+        super(name, password, identity);
     }
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -62,7 +66,7 @@ public class StudentsEntity implements Entity {
     }
 
     public void setPassword(String password) {
-        this.password = Encrypt.md5sum(password);
+        this.password = password;
     }
 
     @Override
@@ -72,10 +76,7 @@ public class StudentsEntity implements Entity {
 
         StudentsEntity that = (StudentsEntity) o;
 
-        if (uuid != null ? !uuid.equals(that.uuid) : that.uuid != null) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
-
-        return true;
+        return (uuid != null ? uuid.equals(that.uuid) : that.uuid == null) && (name != null ? name.equals(that.name) : that.name == null);
     }
 
     @Override

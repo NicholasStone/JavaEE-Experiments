@@ -2,23 +2,24 @@ package com.management.dao;
 
 import com.management.dao.ext.CourseDao;
 import com.management.dao.ext.StudentDao;
-import com.management.dao.ext.TeacherDao;
+import com.management.dao.ext.InstructorDao;
 import com.management.model.CoursesEntity;
+import com.management.model.InstructorEntity;
 import com.management.model.StudentsEntity;
-import com.management.model.TeachersEntity;
 
 import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Created by nicholas on 5/8/17.
+ * @author: nicholas
+ * @date: 5/8/17
  */
 public class DaoTest {
     public static void main(String[] args) {
 //        save();
-        TeacherDao teacherDao = new TeacherDao();
-        TeachersEntity teachersEntity = teacherDao.findByName("teacher1");
-        Set<CoursesEntity> coursesEntitySet = teachersEntity.getCoursesEntities();
+        InstructorDao      teacherDao       = new InstructorDao();
+        InstructorEntity   instructorEntity = teacherDao.findByName("teacher1");
+        Set<CoursesEntity> coursesEntitySet = instructorEntity.getCoursesEntities();
         for(CoursesEntity entity:coursesEntitySet){
             System.out.println(entity.getUuid());
             System.out.println(entity.getName());
@@ -26,10 +27,10 @@ public class DaoTest {
     }
 
     private static void save() {
-        TeacherDao     teacher        = new TeacherDao();
-        TeachersEntity teachersEntity = teacher.findByName("teacher1");
-        teachersEntity.setPassword("123456");
-        System.out.println(teachersEntity.getUuid());
+        InstructorDao    teacher          = new InstructorDao();
+        InstructorEntity instructorEntity = teacher.findByName("teacher1");
+        instructorEntity.setPassword("123456");
+        System.out.println(instructorEntity.getUuid());
 
 
         StudentDao     student        = new StudentDao();
@@ -39,7 +40,7 @@ public class DaoTest {
 
         CourseDao courseDao = new CourseDao();
 //        CoursesEntity coursesEntity = courseDao.findByName("Ass we can!");
-        CoursesEntity coursesEntity = new CoursesEntity("Ass we can!!", teachersEntity);
+        CoursesEntity coursesEntity = new CoursesEntity("Ass we can!!", instructorEntity);
         System.out.println(coursesEntity.getUuid());
 
         Set<CoursesEntity> set = new HashSet<>();

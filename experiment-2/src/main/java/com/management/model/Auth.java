@@ -1,28 +1,29 @@
 package com.management.model;
 
 /**
- * Created by nicholas on 5/11/17.
+ * @author: nicholas
+ * @date: 5/11/17
  */
-public class Auth {
-    private String username;
-    private String password;
-    private String identity;
+public abstract class Auth {
+    protected String name;
+    protected String password;
+    protected String identity;
 
     public Auth() {
     }
 
-    public Auth(String username, String password, String identity) {
-        this.username = username;
+    public Auth(String name, String password, String identity) {
+        this.name = name;
         this.password = password;
         this.identity = identity;
     }
 
-    public String getUsername() {
-        return username;
+    public String getName() {
+        return name;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setName(String username) {
+        this.name = username;
     }
 
     public String getPassword() {

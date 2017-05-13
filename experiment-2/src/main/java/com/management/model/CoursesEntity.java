@@ -7,14 +7,15 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Created by nicholas on 17-5-3.
+ * @author: nicholas
+ * @date: 17-5-3
  */
 @javax.persistence.Entity
 @Table(name = "courses", schema = "message")
 public class CoursesEntity implements Entity {
-    private String         uuid;
-    private String         name;
-    private TeachersEntity teacher;
+    private String           uuid;
+    private String           name;
+    private InstructorEntity teacher;
 
 
     private Set<StudentsEntity> studentsEntities = new HashSet<>(0);
@@ -22,7 +23,7 @@ public class CoursesEntity implements Entity {
     public CoursesEntity() {
     }
 
-    public CoursesEntity(String name, TeachersEntity teacher) {
+    public CoursesEntity(String name, InstructorEntity teacher) {
         this.name = name;
         this.teacher = teacher;
     }
@@ -68,11 +69,11 @@ public class CoursesEntity implements Entity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "teacher_id", nullable = false)
     //https://www.mkyong.com/hibernate/hibernate-one-to-many-relationship-example-annotation/
-    public TeachersEntity getTeacher() {
+    public InstructorEntity getTeacher() {
         return teacher;
     }
 
-    public void setTeacher(TeachersEntity teacher) {
+    public void setTeacher(InstructorEntity teacher) {
         this.teacher = teacher;
     }
 
@@ -83,11 +84,7 @@ public class CoursesEntity implements Entity {
 
         CoursesEntity that = (CoursesEntity) o;
 
-        if (uuid != null ? !uuid.equals(that.uuid) : that.uuid != null) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        if (teacher != null ? !teacher.equals(that.teacher) : that.teacher != null) return false;
-
-        return true;
+        return (uuid != null ? uuid.equals(that.uuid) : that.uuid == null) && (name != null ? name.equals(that.name) : that.name == null) && (teacher != null ? teacher.equals(that.teacher) : that.teacher == null);
     }
 
 //    @Override

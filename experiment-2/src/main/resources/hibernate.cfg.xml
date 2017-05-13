@@ -16,6 +16,6 @@
 
         <mapping class="com.management.model.CoursesEntity"/>
         <mapping class="com.management.model.StudentsEntity"/>
-        <mapping class="com.management.model.TeachersEntity"/>
+        <mapping class="com.management.model.InstructorEntity"/>
     </session-factory>
 </hibernate-configuration>
