@@ -20,7 +20,7 @@
         </interceptors>
         <default-interceptor-ref name="auth"/>
         <global-results>
-            <result name="login">/auth/login.jsp</result>
+            <result name="login">/auth/sign-in.jsp</result>
         </global-results>
     </package>
     <package name="index" extends="struts-default" namespace="/">
@@ -29,10 +29,13 @@
         </action>
     </package>
     <package name="default" extends="interceptor-default" namespace="/auth">
-        <action name="auth" class="com.management.action.AuthAction" method="execute">
+        <action name="sign-in" class="com.management.action.AuthAction" method="signIn">
             <result name="student" type="redirect">/student/index.html</result>
             <result name="instructor" type="redirect">/instructor/index.html</result>
-            <result name="input">login.jsp</result>
+            <result name="input">sign-in.jsp</result>
+        </action>
+        <action name="sign-out" class="com.management.action.AuthAction" method="signOut">
+            <result name="success">sign-in.jsp</result>
         </action>
     </package>
     <package name="instructor" extends="interceptor-default" namespace="/instructor">

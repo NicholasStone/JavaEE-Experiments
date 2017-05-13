@@ -25,7 +25,7 @@
 <body>
 <div class="container">
     <h1>登录</h1>
-    <form action="<s:url namespace="/auth" action="auth"/>" method="post"
+    <form action="<s:url namespace="/auth" action="sign-in"/>" method="post"
           class="col-md-4 col-md-offset-4 form-group form-horizontal">
         <s:actionerror/>
         <div class="form-group form-inline">

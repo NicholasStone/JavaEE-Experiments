@@ -5,6 +5,7 @@ package com.management.model;
  * @date: 5/11/17
  */
 public abstract class Auth {
+    protected String uuid;
     protected String name;
     protected String password;
     protected String identity;
@@ -16,6 +17,14 @@ public abstract class Auth {
         this.name = name;
         this.password = password;
         this.identity = identity;
+    }
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
     public String getName() {

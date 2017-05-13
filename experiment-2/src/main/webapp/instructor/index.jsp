@@ -13,7 +13,10 @@
 </head>
 <body>
 <div class="container">
-    <h2>欢迎 <s:property value="#session.Auth.name"/></h2>
+    <h2>欢迎 <s:property value="instructor.name"/></h2>
+    <s:iterator value="instructor.coursesEntities">
+        <s:property value="name"/>
+    </s:iterator>
 </div>
 </body>
 </html>

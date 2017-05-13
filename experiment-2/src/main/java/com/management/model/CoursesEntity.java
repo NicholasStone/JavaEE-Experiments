@@ -76,22 +76,4 @@ public class CoursesEntity implements Entity {
     public void setTeacher(InstructorEntity teacher) {
         this.teacher = teacher;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        CoursesEntity that = (CoursesEntity) o;
-
-        return (uuid != null ? uuid.equals(that.uuid) : that.uuid == null) && (name != null ? name.equals(that.name) : that.name == null) && (teacher != null ? teacher.equals(that.teacher) : that.teacher == null);
-    }
-
-//    @Override
-//    public int hashCode() {
-//        int result = uuid != null ? uuid.hashCode() : 0;
-//        result = 31 * result + (name != null ? name.hashCode() : 0);
-//        result = 31 * result + (teacher != null ? teacher.hashCode() : 0);
-//        return result;
-//    }
 }

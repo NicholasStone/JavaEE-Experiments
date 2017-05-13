@@ -16,7 +16,7 @@
     <h2 style="text-align: center">
         选课系统
     </h2>
-    <p style="text-align: center">请<a href="<s:url namespace="/auth" action="auth"/>">登录</a></p>
+    <p style="text-align: center">请<a href="<s:url namespace="/auth" action="sign-in"/>">登录</a></p>
 </div>
 </body>
 </html>

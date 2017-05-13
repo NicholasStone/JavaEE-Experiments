@@ -14,7 +14,6 @@ import java.util.Set;
 @javax.persistence.Entity
 @Table(name = "instructor", schema = "message")
 public class InstructorEntity extends Auth implements Entity {
-    private String uuid;
     private Set<CoursesEntity> coursesEntities = new HashSet<>(0);
 
     public InstructorEntity(String name) {
@@ -67,22 +66,5 @@ public class InstructorEntity extends Auth implements Entity {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        InstructorEntity that = (InstructorEntity) o;
-
-        return (uuid != null ? uuid.equals(that.uuid) : that.uuid == null) && (name != null ? name.equals(that.name) : that.name == null);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = uuid != null ? uuid.hashCode() : 0;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        return result;
     }
 }
