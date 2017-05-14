@@ -15,10 +15,6 @@ public class InstructorAction extends ActionSupport implements SessionAware {
     private InstructorEntity    instructor;
     private Map<String, Object> session;
 
-    public String newCourse() {
-        return SUCCESS;
-    }
-
     public String index() {
         instructor = (InstructorEntity) session.get("Auth");
         return SUCCESS;

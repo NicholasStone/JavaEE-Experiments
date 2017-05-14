@@ -48,7 +48,8 @@ public class AuthAction extends ActionSupport implements ServletRequestAware, Se
         this.identity = identity;
     }
 
-    public String signIn() throws Exception {
+    @Override
+    public String execute() throws Exception {
         if (!request.getMethod().toUpperCase().equals("POST")) {
             System.out.println("login");
             return LOGIN;

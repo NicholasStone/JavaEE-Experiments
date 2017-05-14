@@ -16,6 +16,10 @@ public class CourseDao extends Dao {
     }
 
     public CoursesEntity findByName(String name) {
-        return (CoursesEntity) super.findByKey("from CoursesEntity where name=?", Parse.str2list(name));
+        return (CoursesEntity) super.findByKey("FROM CoursesEntity where name=?", Parse.str2list(name));
+    }
+
+    public CoursesEntity findById(String id) {
+        return (CoursesEntity) super.findByKey("FROM CoursesEntity where id=?", Parse.str2list(id));
     }
 }

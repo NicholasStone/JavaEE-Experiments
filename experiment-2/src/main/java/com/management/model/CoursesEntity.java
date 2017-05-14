@@ -1,9 +1,13 @@
 package com.management.model;
 
+import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.NotFound;
 
 import javax.persistence.*;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -13,12 +17,19 @@ import java.util.Set;
 @javax.persistence.Entity
 @Table(name = "courses", schema = "message")
 public class CoursesEntity implements Entity {
-    private String           uuid;
-    private String           name;
-    private InstructorEntity teacher;
-
-
+    private String              uuid;
+    private String              name;
+    private InstructorEntity    teacher;
+    private Map<String, String> timeAndLocation;
+    @Transient
     private Set<StudentsEntity> studentsEntities = new HashSet<>(0);
+
+    {
+        timeAndLocation = new HashMap<>();
+        timeAndLocation.put("第1-18周周一第1-2节","教学主楼A303");
+        timeAndLocation.put("第1-18周周三第5-6节","教学主楼A502");
+        timeAndLocation.put("第1-18周周四第3-4节","教学主楼A207");
+    }
 
     public CoursesEntity() {
     }
@@ -75,5 +86,10 @@ public class CoursesEntity implements Entity {
 
     public void setTeacher(InstructorEntity teacher) {
         this.teacher = teacher;
+    }
+
+    @Transient
+    public Map<String, String> getTimeAndLocation() {
+        return timeAndLocation;
     }
 }

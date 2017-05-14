@@ -29,7 +29,7 @@
         </action>
     </package>
     <package name="default" extends="interceptor-default" namespace="/auth">
-        <action name="sign-in" class="com.management.action.AuthAction" method="signIn">
+        <action name="sign-in" class="com.management.action.AuthAction" method="execute">
             <result name="student" type="redirect">/student/index.html</result>
             <result name="instructor" type="redirect">/instructor/index.html</result>
             <result name="input">sign-in.jsp</result>
@@ -46,6 +46,14 @@
     <package name="student" extends="interceptor-default" namespace="/student">
         <action name="index" class="com.management.action.StudentAction" method="index">
             <result name="success">/student/index.jsp</result>
+        </action>
+    </package>
+    <package name="course" extends="interceptor-default" namespace="/course">
+        <action name="index" class="com.management.action.CourseAction" method="index">
+            <result name="success">/course/index.jsp</result>
+        </action>
+        <action name="create" class="com.management.action.CourseAction" method="create">
+            <result name="success">/course/create.jsp</result>
         </action>
     </package>
 </struts>
