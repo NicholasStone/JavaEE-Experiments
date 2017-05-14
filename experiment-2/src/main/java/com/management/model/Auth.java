@@ -50,4 +50,11 @@ public abstract class Auth {
     public void setIdentity(String identity) {
         this.identity = identity;
     }
+
+    @Override
+    public String toString() {
+        return "name:" + name +
+                "password:" + password +
+                "identity:" + identity;
+    }
 }

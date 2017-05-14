@@ -12,13 +12,13 @@ public class AuthInterceptor extends AbstractInterceptor {
     @Override
     public String intercept(ActionInvocation actionInvocation) throws Exception {
         String action = actionInvocation.getProxy().getActionName();
-        if ("sign-in".equals(action)) {
+        if ("sign-in".equals(action) || "auth".equals(action)) {
             return actionInvocation.invoke();
         }
 
         Auth auth = (Auth) actionInvocation.getInvocationContext().getSession().get("Auth");
         if (auth == null) {
-            return "login";
+            return "sign-in";
         }
         return actionInvocation.invoke();
     }

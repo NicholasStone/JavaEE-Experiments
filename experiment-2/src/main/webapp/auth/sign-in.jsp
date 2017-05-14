@@ -25,8 +25,8 @@
 <body>
 <div class="container">
     <h1>登录</h1>
-    <form action="<s:url namespace="/auth" action="sign-in"/>" method="post"
-          class="col-md-4 col-md-offset-4 form-group form-horizontal">
+    <form action="<s:url namespace="/auth" action="auth"/>" method="post"
+          class="col-md-4 col-md-offset-4 form-horizontal">
         <s:actionerror/>
         <div class="form-group form-inline">
             <div class="col-sm-3">
@@ -43,7 +43,7 @@
         <div class="form-group form-inline">
             <label class="col-sm-3">身份:</label>
             <div class="col-sm-9">
-                <label>
+                <label class="col-sm-5">
                     <s:textfield name="identity" class="radio" type="radio" value="instructor"/> 教师
                 </label>
                 <label>

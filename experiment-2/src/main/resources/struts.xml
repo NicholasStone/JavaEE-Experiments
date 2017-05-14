@@ -10,6 +10,7 @@
     <constant name="struts.action.extension" value="html"/>
     <constant name="struts.i18n.encoding" value="UTF-8"/>
     <constant name="struts.serve.static" value="true"/>
+
     <package name="interceptor-default" extends="struts-default">
         <interceptors>
             <interceptor name="auth-check" class="com.management.interceptor.AuthInterceptor"/>
@@ -20,16 +21,21 @@
         </interceptors>
         <default-interceptor-ref name="auth"/>
         <global-results>
-            <result name="login">/auth/sign-in.jsp</result>
+            <result name="sign-in" type="redirect">/auth/sign-in.html</result>
         </global-results>
     </package>
+
     <package name="index" extends="struts-default" namespace="/">
         <action name="index" class="com.management.action.IndexAction" method="index">
             <result>/index.jsp</result>
         </action>
     </package>
+
     <package name="default" extends="interceptor-default" namespace="/auth">
-        <action name="sign-in" class="com.management.action.AuthAction" method="execute">
+        <action name="sign-in">
+            <result>sign-in.jsp</result>
+        </action>
+        <action name="auth" class="com.management.action.AuthAction" method="execute">
             <result name="student" type="redirect">/student/index.html</result>
             <result name="instructor" type="redirect">/instructor/index.html</result>
             <result name="input">sign-in.jsp</result>
@@ -38,22 +44,46 @@
             <result name="success">sign-in.jsp</result>
         </action>
     </package>
+
     <package name="instructor" extends="interceptor-default" namespace="/instructor">
         <action name="index" class="com.management.action.InstructorAction" method="index">
             <result name="success">/instructor/index.jsp</result>
         </action>
     </package>
+
     <package name="student" extends="interceptor-default" namespace="/student">
         <action name="index" class="com.management.action.StudentAction" method="index">
             <result name="success">/student/index.jsp</result>
         </action>
     </package>
+
     <package name="course" extends="interceptor-default" namespace="/course">
+        <interceptors>
+            <interceptor name="course-permission-check" class="com.management.interceptor.CourseInterceptor"/>
+            <interceptor-stack name="course">
+                <interceptor-ref name="auth"/>
+                <interceptor-ref name="course-permission-check"/>
+            </interceptor-stack>
+        </interceptors>
+        <default-interceptor-ref name="course"/>
+        <global-results>
+            <result name="permission-denied">/error.jsp</result>
+        </global-results>
         <action name="index" class="com.management.action.CourseAction" method="index">
             <result name="success">/course/index.jsp</result>
         </action>
-        <action name="create" class="com.management.action.CourseAction" method="create">
-            <result name="success">/course/create.jsp</result>
+        <action name="create">
+            <result>/course/create.jsp</result>
+        </action>
+        <action name="store" class="com.management.action.CourseAction" method="store">
+            <result name="success" type="redirect">/instructor/index.html</result>
+            <result name="input">/course/create.jsp</result>
+        </action>
+        <action name="select" class="com.management.action.CourseAction" method="select">
+            <result name="success">/course/index.jsp</result>
+        </action>
+        <action name="show" class="com.management.action.CourseAction" method="show">
+            <result name="success">/course/show.jsp</result>
         </action>
     </package>
 </struts>
