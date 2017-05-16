@@ -1,6 +1,5 @@
 package com.management.model;
 
-import com.management.util.Encrypt;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -12,7 +11,7 @@ import java.util.Set;
  * @date: 17-5-3
  */
 @javax.persistence.Entity
-@Table(name = "instructor", schema = "message")
+@Table(name = "instructors", schema = "message")
 public class InstructorEntity extends Auth implements Entity {
     private Set<CoursesEntity> coursesEntities = new HashSet<>(0);
 
@@ -27,7 +26,7 @@ public class InstructorEntity extends Auth implements Entity {
         super(name, password, identity);
     }
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "teacher")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "instructor")
     public Set<CoursesEntity> getCoursesEntities() {
         return coursesEntities;
     }

@@ -16,13 +16,11 @@ import java.util.Map;
  * @author: nicholas
  * @date: 17-5-2
  */
-public class AuthAction extends ActionSupport implements ServletRequestAware, SessionAware, UserIdentity {
-    private String              password;
-    private String              username;
-    private String              identity;
-    private Auth                auth;
-    private Map<String, Object> session;
-    private HttpServletRequest  request;
+public class AuthAction extends DefaultAction {
+    private String password;
+    private String username;
+    private String identity;
+    private Auth   auth;
 
     public String getPassword() {
         return password;
@@ -54,6 +52,7 @@ public class AuthAction extends ActionSupport implements ServletRequestAware, Se
             System.out.println("login");
             return LOGIN;
         }
+        auth.setIdentity(identity);
         session.put("Auth", auth);
         return identity;
     }
@@ -86,24 +85,6 @@ public class AuthAction extends ActionSupport implements ServletRequestAware, Se
         if (!authCheck()) {
             addActionError("用户不存在或密码错误");
         }
-    }
-
-    public HttpServletRequest getRequest() {
-        return request;
-    }
-
-    @Override
-    public void setServletRequest(HttpServletRequest httpServletRequest) {
-        this.request = httpServletRequest;
-    }
-
-    public Map<String, Object> getSession() {
-        return session;
-    }
-
-    @Override
-    public void setSession(Map<String, Object> session) {
-        this.session = session;
     }
 
     private boolean authCheck() {

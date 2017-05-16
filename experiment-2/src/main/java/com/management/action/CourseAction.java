@@ -1,36 +1,49 @@
 package com.management.action;
 
 import com.management.dao.ext.CourseDao;
+import com.management.dao.ext.StudentDao;
 import com.management.model.CoursesEntity;
-import com.opensymphony.xwork2.ActionSupport;
-import org.apache.struts2.interceptor.SessionAware;
+import com.management.model.StudentsEntity;
 
-import java.util.Map;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * @author: nicholas
  * @date: 5/13/17
  */
-public class CourseAction extends ActionSupport implements SessionAware {
-    private CoursesEntity       coursesEntity;
-    private Map<String, Object> session;
-    private String              id;
+public class CourseAction extends DefaultAction {
+    private List        courses;
+    private String      id;
+    private Set<String> selected;
 
-    public Map<String, Object> getSession() {
-        return session;
-    }
-
-    @Override
-    public void setSession(Map<String, Object> map) {
-        session = map;
-    }
+    private CourseDao courseDao = new CourseDao();
 
     public String index() throws Exception {
-        coursesEntity = new CourseDao().findById(id);
-        return coursesEntity == null ? ERROR : SUCCESS;
+        courses = courseDao.findAll();
+        return SUCCESS;
     }
 
-    public String create(){
+    public String create() {
+        return SUCCESS;
+    }
+
+    public String select() {
+        if (!isPost()) {
+            return SUCCESS;
+        }
+        StudentDao         studentDao      = new StudentDao();
+        StudentsEntity     student         = (StudentsEntity) session.get("Auth");
+        Set<CoursesEntity> coursesEntities = new HashSet<>();
+        if (selected != null) {
+            for (String id : selected) {
+                coursesEntities.add(courseDao.findById(id));
+            }
+        }
+        student.setCoursesEntities(coursesEntities);
+        studentDao.update(student);
+        addActionMessage("选课成功");
         return SUCCESS;
     }
 
@@ -42,11 +55,19 @@ public class CourseAction extends ActionSupport implements SessionAware {
         return id;
     }
 
-    public CoursesEntity getCoursesEntity() {
-        return coursesEntity;
+    public List getCourses() {
+        return courses;
     }
 
-    public void setCoursesEntity(CoursesEntity coursesEntity) {
-        this.coursesEntity = coursesEntity;
+    public void setCourses(List courses) {
+        this.courses = courses;
+    }
+
+    public Set getSelected() {
+        return selected;
+    }
+
+    public void setSelected(Set<String> selected) {
+        this.selected = selected;
     }
 }

@@ -55,5 +55,8 @@
         <action name="create" class="com.management.action.CourseAction" method="create">
             <result name="success">/course/create.jsp</result>
         </action>
+        <action name="select" class="com.management.action.CourseAction" method="select">
+            <result name="success" type="redirect">/course/index.html</result>
+        </action>
     </package>
 </struts>
