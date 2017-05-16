@@ -85,5 +85,8 @@
         <action name="show" class="com.management.action.CourseAction" method="show">
             <result name="success">/course/show.jsp</result>
         </action>
+        <action name="select" class="com.management.action.CourseAction" method="select">
+            <result name="success" type="redirect">/course/index.html</result>
+        </action>
     </package>
 </struts>

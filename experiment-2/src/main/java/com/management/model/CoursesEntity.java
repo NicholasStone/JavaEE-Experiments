@@ -1,8 +1,6 @@
 package com.management.model;
 
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.NotFound;
 
 import javax.persistence.*;
 import java.util.HashMap;
@@ -19,7 +17,7 @@ import java.util.Set;
 public class CoursesEntity implements Entity {
     private String              uuid;
     private String              name;
-    private InstructorEntity    teacher;
+    private InstructorEntity    instructor;
     private Map<String, String> timeAndLocation;
     @Transient
     private Set<StudentsEntity> studentsEntities = new HashSet<>(0);
@@ -34,9 +32,9 @@ public class CoursesEntity implements Entity {
     public CoursesEntity() {
     }
 
-    public CoursesEntity(String name, InstructorEntity teacher) {
+    public CoursesEntity(String name, InstructorEntity instructor) {
         this.name = name;
-        this.teacher = teacher;
+        this.instructor = instructor;
     }
 
     @Id
@@ -80,12 +78,12 @@ public class CoursesEntity implements Entity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "teacher_id", nullable = false)
     //https://www.mkyong.com/hibernate/hibernate-one-to-many-relationship-example-annotation/
-    public InstructorEntity getTeacher() {
-        return teacher;
+    public InstructorEntity getInstructor() {
+        return instructor;
     }
 
-    public void setTeacher(InstructorEntity teacher) {
-        this.teacher = teacher;
+    public void setInstructor(InstructorEntity teacher) {
+        this.instructor = teacher;
     }
 
     @Transient

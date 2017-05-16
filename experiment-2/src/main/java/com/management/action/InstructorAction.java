@@ -10,10 +10,9 @@ import java.util.Map;
  * @author: nicholas
  * @date: 5/12/17
  */
-public class InstructorAction extends ActionSupport implements SessionAware {
+public class InstructorAction extends DefaultAction {
     private String              name;
     private InstructorEntity    instructor;
-    private Map<String, Object> session;
 
     public String index() {
         instructor = (InstructorEntity) session.get("Auth");
@@ -34,10 +33,5 @@ public class InstructorAction extends ActionSupport implements SessionAware {
 
     public void setInstructor(InstructorEntity instructor) {
         this.instructor = instructor;
-    }
-
-    @Override
-    public void setSession(Map<String, Object> session) {
-        this.session = session;
     }
 }
