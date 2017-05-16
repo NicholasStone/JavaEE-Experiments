@@ -3,10 +3,12 @@ package com.management.action;
 import com.management.dao.ext.CourseDao;
 import com.management.dao.ext.StudentDao;
 import com.management.model.CoursesEntity;
-import com.opensymphony.xwork2.ActionSupport;
-import org.apache.struts2.interceptor.SessionAware;
+import com.management.model.InstructorEntity;
+import com.management.model.StudentsEntity;
 
-import java.util.Map;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * @author: nicholas
@@ -16,6 +18,7 @@ public class CourseAction extends DefaultAction {
     private List        courses;
     private String      id;
     private Set<String> selected;
+    private String      name;
 
     private CourseDao courseDao = new CourseDao();
 
@@ -24,8 +27,24 @@ public class CourseAction extends DefaultAction {
         return SUCCESS;
     }
 
-    public String create() {
-        return SUCCESS;
+    public String store() {
+        if (isPost()) {
+            InstructorEntity instructor    = (InstructorEntity) session.get("Auth");
+            CourseDao        dao           = new CourseDao();
+            CoursesEntity    coursesEntity = dao.findByName(name);
+
+            if (coursesEntity == null) {
+                coursesEntity = new CoursesEntity(name, instructor);
+                System.out.println(coursesEntity);
+                dao.save(coursesEntity);
+                return SUCCESS;
+            } else {
+                addActionError("课程名称重复");
+                return INPUT;
+            }
+        } else {
+            return INPUT;
+        }
     }
 
     public String select() {
@@ -43,6 +62,10 @@ public class CourseAction extends DefaultAction {
         student.setCoursesEntities(coursesEntities);
         studentDao.update(student);
         addActionMessage("选课成功");
+        return SUCCESS;
+    }
+
+    public String show() throws Exception {
         return SUCCESS;
     }
 
@@ -68,5 +91,13 @@ public class CourseAction extends DefaultAction {
 
     public void setSelected(Set<String> selected) {
         this.selected = selected;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

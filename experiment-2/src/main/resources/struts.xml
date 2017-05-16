@@ -31,17 +31,23 @@
         </action>
     </package>
 
-    <package name="default" extends="interceptor-default" namespace="/auth">
+    <package name="auth" extends="interceptor-default" namespace="/auth">
         <action name="sign-in">
             <result>sign-in.jsp</result>
         </action>
         <action name="auth" class="com.management.action.AuthAction" method="execute">
-            <result name="student" type="redirect">/student/index.html</result>
-            <result name="instructor" type="redirect">/instructor/index.html</result>
+            <result name="success" type="redirect">/home/index.html</result>
             <result name="input">sign-in.jsp</result>
         </action>
         <action name="sign-out" class="com.management.action.AuthAction" method="signOut">
             <result name="success">sign-in.jsp</result>
+        </action>
+    </package>
+
+    <package name="home" extends="course" namespace="/home">
+        <action name="index" class="com.management.action.HomeAction">
+            <result name="student" type="redirect">/student/index.html</result>
+            <result name="instructor" type="redirect">/instructor/index.html</result>
         </action>
     </package>
 
@@ -84,9 +90,6 @@
         </action>
         <action name="show" class="com.management.action.CourseAction" method="show">
             <result name="success">/course/show.jsp</result>
-        </action>
-        <action name="select" class="com.management.action.CourseAction" method="select">
-            <result name="success" type="redirect">/course/index.html</result>
         </action>
     </package>
 </struts>

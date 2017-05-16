@@ -22,33 +22,9 @@ public class AuthAction extends DefaultAction {
     private String identity;
     private Auth   auth;
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getIdentity() {
-        return identity;
-    }
-
-    public void setIdentity(String identity) {
-        this.identity = identity;
-    }
-
     @Override
     public String execute() throws Exception {
-        if (!request.getMethod().toUpperCase().equals("POST")) {
+        if (!isPost()) {
             return "sign-in";
         }
         auth.setIdentity(identity);
@@ -63,7 +39,7 @@ public class AuthAction extends DefaultAction {
 
     @Override
     public void validate() {
-        if (!request.getMethod().toUpperCase().equals("POST")) {
+        if (!isPost()) {
             return;
         }
         if (identity == null) {
@@ -93,5 +69,29 @@ public class AuthAction extends DefaultAction {
             auth = new StudentDao().findByName(username);
         }
         return auth != null && Encrypt.md5sum(password).equals(auth.getPassword());
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getIdentity() {
+        return identity;
+    }
+
+    public void setIdentity(String identity) {
+        this.identity = identity;
     }
 }
