@@ -1,5 +1,8 @@
 package com.experiment.nicholas.action;
 
+import com.experiment.nicholas.dao.AuthDao;
+import com.experiment.nicholas.dao.impl.AuthDaoImpl;
+import com.experiment.nicholas.model.Auth;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
@@ -16,18 +19,29 @@ public class AuthAction extends ActionSupport implements ServletRequestAware {
 
     @Override
     public String execute() throws Exception {
-        return super.execute();
+        AuthDao authDao = new AuthDaoImpl();
+        Auth    auth    = authDao.authorize(username, password);
+        if (auth == null){
+            addFieldError("username", "用户不存在或密码错误");
+            return INPUT;
+        }else {
+            return SUCCESS;
+        }
     }
 
     @Override
     public void validate() {
-        if (isPost()){
-            if (username == null || username.trim().equals("")){
+        if (isPost()) {
+            if (username == null || username.trim().equals("")) {
+                addFieldError("username", "用户名不能为空");
+            }
+            if (password == null || username.trim().equals("")) {
+                addFieldError("password", "密码不能为空");
             }
         }
     }
 
-    private boolean isPost(){
+    private boolean isPost() {
         return request.getMethod().toUpperCase().equals("POST");
     }
 

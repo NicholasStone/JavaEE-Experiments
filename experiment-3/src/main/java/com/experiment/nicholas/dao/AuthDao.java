@@ -8,4 +8,6 @@ import com.experiment.nicholas.model.Auth;
  */
 public interface AuthDao {
     public Auth authorize(String username, String password);
+
+    public Auth findByName(String name);
 }

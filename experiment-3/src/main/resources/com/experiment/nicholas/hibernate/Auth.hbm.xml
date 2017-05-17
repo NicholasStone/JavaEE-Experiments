@@ -9,10 +9,10 @@
             <generator class="assigned"/>
         </id>
         <property name="username" type="java.lang.String">
-            <column name="ACCOUNT" length="50" not-null="true"/>
+            <column name="username" length="50" not-null="true"/>
         </property>
         <property name="password" type="java.lang.String">
-            <column name="PASSWORD" length="255" not-null="true"/>
+            <column name="password" length="255" not-null="true"/>
         </property>
     </class>
 </hibernate-mapping>

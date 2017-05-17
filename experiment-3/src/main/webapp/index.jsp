@@ -19,7 +19,7 @@
         }
 
         fieldset {
-            margin: 30vh auto 0;
+            margin: 30vh 30vw 0;
             padding: 10px;
         }
     </style>
