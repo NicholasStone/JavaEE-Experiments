@@ -8,5 +8,11 @@
     <import resource="config/spring/HibernateSessionFactory.xml"/>
 
     <!-- Beans Declaration -->
-    <import resource="com/experiment/nicholas/spring/AuthBean.xml"/>
+    <!--<import resource="com/experiment/nicholas/spring/AuthBean.xml"/>-->
+    <bean id="authDao" class="com.experiment.nicholas.dao.impl.AuthDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="auth" class="com.experiment.nicholas.action.AuthAction">
+        <property name="dao" ref="authDao"/>
+    </bean>
 </beans>

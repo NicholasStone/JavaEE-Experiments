@@ -7,7 +7,7 @@ import com.experiment.nicholas.model.Auth;
  * @Date: 5/17/17
  */
 public interface AuthDao {
-    public Auth authorize(String username, String password);
+    public Auth authorize(Auth auth);
 
     public Auth findByName(String name);
 }

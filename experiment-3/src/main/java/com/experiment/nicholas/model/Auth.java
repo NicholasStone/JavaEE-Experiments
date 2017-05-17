@@ -1,13 +1,23 @@
 package com.experiment.nicholas.model;
 
+import java.io.Serializable;
+
 /**
  * @Author: nicholas
  * @Date: 5/17/17
  */
-public class Auth {
+
+public class Auth implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private int    id;
     private String username;
     private String password;
+
+    public Auth(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
 
     public int getId() {
         return id;

@@ -5,6 +5,8 @@ import com.experiment.nicholas.dao.impl.AuthDaoImpl;
 import com.experiment.nicholas.model.Auth;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.interceptor.ServletRequestAware;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,15 +18,15 @@ public class AuthAction extends ActionSupport implements ServletRequestAware {
     private String             username;
     private String             password;
     private HttpServletRequest request;
+    private AuthDao            dao;
 
     @Override
     public String execute() throws Exception {
-        AuthDao authDao = new AuthDaoImpl();
-        Auth    auth    = authDao.authorize(username, password);
-        if (auth == null){
+        Auth               auth    = dao.authorize(new Auth(username, password));
+        if (auth == null) {
             addFieldError("username", "用户不存在或密码错误");
             return INPUT;
-        }else {
+        } else {
             return SUCCESS;
         }
     }
@@ -63,6 +65,10 @@ public class AuthAction extends ActionSupport implements ServletRequestAware {
 
     public void setServletRequest(javax.servlet.http.HttpServletRequest httpServletRequest) {
         request = httpServletRequest;
+    }
+
+    public void setDao(AuthDao dao) {
+        this.dao = dao;
     }
 }
 
