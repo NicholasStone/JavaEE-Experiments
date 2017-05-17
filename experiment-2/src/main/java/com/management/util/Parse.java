@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by nicholas on 5/10/17.
+ * @Author: nicholas
+ * @Date: 5/10/17
  */
 public class Parse {
     public static List<String> str2list(String string){
