@@ -1,3 +1,4 @@
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <html lang="en">
 <head>
@@ -9,7 +10,7 @@
 </head>
 <body>
 <h1>
-    登录成功
+    欢迎 <s:property value="#session.Auth.username"/>
 </h1>
 </body>
 </html>

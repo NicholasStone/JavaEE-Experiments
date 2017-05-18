@@ -17,7 +17,6 @@ public class AuthDaoImpl extends HibernateDaoSupport implements AuthDao {
 
     public Auth findByName(String name) {
         return (Auth) getHibernateTemplate().find("FROM Auth where username=?", name).get(0);
-
     }
 
     public void setFactory(SessionFactory sessionFactory) {
