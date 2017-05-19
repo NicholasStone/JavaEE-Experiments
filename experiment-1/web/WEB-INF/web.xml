@@ -14,12 +14,4 @@
         <servlet-name>MessageBoardServlet</servlet-name>
         <url-pattern>/board</url-pattern>
     </servlet-mapping>
-    <servlet>
-        <servlet-name>Demo</servlet-name>
-        <servlet-class>com.messageboard.servlet.DemoServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>DemoServlet</servlet-name>
-        <url-pattern>/demo</url-pattern>
-    </servlet-mapping>
 </web-app>
